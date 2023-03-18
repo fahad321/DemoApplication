@@ -10,8 +10,8 @@ export interface IResults {
 const Products: React.FC<IResults> = ({ productResults }) => {
     const [list, setList] = useState(productResults);
     const [fList, setFList] = useState(productResults);
-    const filterArray = fList.map(item => item.type)
-        .filter((value, index, self) => self.indexOf(value) === index);
+    const filterArray = fList.map((item:IProductsData) => item.type)
+        .filter((value:string, index:string, self:any) => self.indexOf(value) === index);
 
     function filterSelectedProduct(productType: string) {
         if (productType === "All") {
@@ -39,7 +39,7 @@ const Products: React.FC<IResults> = ({ productResults }) => {
                             <option value="All">All</option>
                             {fList !== undefined &&
                                 fList.length &&
-                                filterArray.map((item, index) => (
+                                filterArray.map((item:string, index:string) => (
                                     <option key={index} value={item}>{item}</option>
                                 ))}
                         </select>
@@ -48,7 +48,7 @@ const Products: React.FC<IResults> = ({ productResults }) => {
                 <div className={styles.product__tiles}>
                     {list !== undefined &&
                         list.length &&
-                        list.map((item) => (
+                        list.map((item: IProductsData) => (
                             <ProductTile key={item.index} {...item} />
                         ))}{' '}
                 </div>

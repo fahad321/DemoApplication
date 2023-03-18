@@ -37,5 +37,6 @@
     "Vercel",
     "Viewports",
     "WEBP"
-  ]
+  ],
+  "git.ignoreLimitWarning": true
 }

@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps<IResults> = async (context) 
   };
 
 
-const Home: NextPageWithLayout<IResults> = ( productResults) => {
+const Home: NextPageWithLayout<IResults> = ( productResults: any) => {
 console.log(typeof(productResults));
   return (
     <div>
@@ -39,6 +39,6 @@ console.log(typeof(productResults));
 export default Home;
 
 
-Home.getLayout = (page) => {
+Home.getLayout = (page: any) => {
   return <PrimaryLayout>{page}</PrimaryLayout>;
 };
