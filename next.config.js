@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['i.pravatar.cc'],
+    domains: ['cdn.shopify.com','www.agcequipment.com.au', 'i.pravatar.cc', 'www.edesk.com', 'az777500.vo.msecnd.net'],
   },
   i18n: {
     locales: ['en', 'fr'],
