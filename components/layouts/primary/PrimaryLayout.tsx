@@ -13,6 +13,7 @@ const PrimaryLayout: React.FC<IPrimaryLayout> = ({
 }) => {
   return (
     <>
+    <h1>Hello</h1>
       <Head>
         <title>NextJs Fullstack App Template</title>
       </Head>

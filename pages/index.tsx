@@ -1,34 +1,42 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
-import Search from '../components/utility/search/Search';
+import Products from "../components/products/Products";
+import { IProductsData } from '../lib/products/types';
+import { IApiProductsResponseData } from './api/products';
 import { NextPageWithLayout } from './page';
 
-const Home: NextPageWithLayout = () => {
-  const { locale } = useRouter();
+export interface IResults {
+    productResults: IProductsData[];
+}
 
+export const getServerSideProps: GetServerSideProps<IResults> = async (context) => {
+    let productResults: IApiProductsResponseData = [];
+    const response = await fetch(`http://${context.req.headers.host}/api/products`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
+      });
+      productResults = await response.json();
+    return {
+      props: {
+        // Will be passed to the page component as props
+        productResults,
+      },
+    };
+  };
+
+
+const Home: NextPageWithLayout<IResults> = ( productResults) => {
   return (
-    <section className="flex flex-col items-center gap-y-5 mt-12 sm:mt-36">
-      <Image
-        src="/Google.png"
-        alt="Google Logo"
-        width={272}
-        height={92}
-        priority
-      />
-      <Search />
-      <p>
-        Lets have a look at: {"   "}
-        <Link href="/card" locale={locale === 'en' ? 'fr' : 'en'}>
-          Card
-        </Link>
-      </p>
-    </section>
+    <div>
+        <Products {...productResults}/>
+    </div>
   );
 };
 
 export default Home;
+
 
 Home.getLayout = (page) => {
   return <PrimaryLayout>{page}</PrimaryLayout>;
